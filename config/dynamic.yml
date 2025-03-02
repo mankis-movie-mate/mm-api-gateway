@@ -1,9 +1,7 @@
 http:
   routers:
     dashboard:
-      rule: "Host(`localhost`)"
+      rule: "PathPrefix(`/api`) || PathPrefix(`/dashboard`)"
       entryPoints:
         - internal
       service: api@internal
-      middlewares:
-        - dashboard-auth
