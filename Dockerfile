@@ -1,15 +1,17 @@
 FROM traefik:latest
 
-USER traefik
+RUN addgroup --system traefik && adduser --system --ingroup traefik traefik
 
-COPY --chown=traefik:traefik ./config/traefik.yml /etc/traefik/traefik.yml
-
-COPY --chown=traefik:traefik ./config/dynamic.yml /etc/traefik/dynamic.yml
+COPY ./config/traefik.yml /etc/traefik/traefik.yml
+COPY ./config/dynamic.yml /etc/traefik/dynamic.yml
 
 VOLUME ["/letsencrypt"]
 
+RUN chown -R traefik:traefik /etc/traefik /letsencrypt
+
+USER traefik
+
 EXPOSE 80 443
 
-ENTRYPOINT ["traefik"]
-
-
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["traefik"]
