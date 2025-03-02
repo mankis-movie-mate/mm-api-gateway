@@ -7,9 +7,3 @@ http:
       service: api@internal
       middlewares:
         - dashboard-auth
-
-  middlewares:
-    dashboard-auth:
-      basicAuth:
-        users:
-          - "${MOVIE_MATE_API_GATEWAY_DASHBOARD_USER}"
