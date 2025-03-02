@@ -4,7 +4,7 @@ RUN apk add --no-cache gettext
 
 COPY ./entrypoint.sh /entrypoint.sh
 COPY ./config/traefik.yml /etc/traefik/traefik.yml
-COPY ./config/dynamic.template.yml /etc/traefik/dynamic.template.yml
+COPY ./config/dynamic.template.yml /dynamic.template.yml
 
 RUN chmod +x /entrypoint.sh
 
