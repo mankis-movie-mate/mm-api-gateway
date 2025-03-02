@@ -9,3 +9,10 @@ entryPoints:
 providers:
   file:
     filename: "/etc/traefik/dynamic.yml"
+
+log:
+  level: DEBUG
+  format: common
+
+accessLog:
+  format: common
