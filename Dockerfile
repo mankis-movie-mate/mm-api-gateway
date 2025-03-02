@@ -4,6 +4,7 @@ USER root
 
 RUN apk add --no-cache gettext
 
+RUN addgroup --system traefik && adduser --system --ingroup traefik traefik
 USER traefik
 
 COPY ./entrypoint.sh /entrypoint.sh
