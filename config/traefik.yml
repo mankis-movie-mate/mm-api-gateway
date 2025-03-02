@@ -8,8 +8,6 @@ entryPoints:
 
 providers:
   consulCatalog:
-    endpoint:
-      address: "${MOVIE_MATE_DISCOVERY_SERVER_HOST}:${MOVIE_MATE_DISCOVERY_SERVER_PORT}"
     exposedByDefault: false
 
   file:
