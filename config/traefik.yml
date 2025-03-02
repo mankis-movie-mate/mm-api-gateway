@@ -1,0 +1,28 @@
+log:
+  level: ${TRAEFIK_LOG_LEVEL}
+
+api:
+  dashboard: true
+  insecure: false
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  consulCatalog:
+    endpoint:
+      address: "${CONSUL_HOST}:${CONSUL_PORT}"
+    exposedByDefault: false
+  file:
+    filename: "/etc/traefik/dynamic.yml"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: "${ACME_EMAIL}"
+      storage: "/letsencrypt/acme.json"
+      httpChallenge:
+        entryPoint: web
