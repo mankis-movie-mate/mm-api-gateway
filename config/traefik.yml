@@ -7,8 +7,6 @@ entryPoints:
     address: ":8080"
 
 providers:
-  consulCatalog:
-    exposedByDefault: false
 
   file:
     filename: "/etc/traefik/dynamic.yml"
