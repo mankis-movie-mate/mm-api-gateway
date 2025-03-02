@@ -11,4 +11,4 @@ RUN chmod +x /entrypoint.sh
 EXPOSE 8080
 EXPOSE 80 443
 
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
