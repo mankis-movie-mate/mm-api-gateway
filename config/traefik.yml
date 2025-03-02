@@ -1,28 +1,16 @@
-log:
-  level: ${TRAEFIK_LOG_LEVEL}
-
 api:
   dashboard: true
   insecure: false
 
 entryPoints:
-  web:
-    address: ":80"
-  websecure:
-    address: ":443"
+  internal:
+    address: ":8080"
 
 providers:
   consulCatalog:
     endpoint:
-      address: "${CONSUL_HOST}:${CONSUL_PORT}"
+      address: "${MOVIE_MATE_DISCOVERY_SERVER_HOST}:${MOVIE_MATE_DISCOVERY_SERVER_PORT}"
     exposedByDefault: false
+
   file:
     filename: "/etc/traefik/dynamic.yml"
-
-certificatesResolvers:
-  myresolver:
-    acme:
-      email: "${ACME_EMAIL}"
-      storage: "/letsencrypt/acme.json"
-      httpChallenge:
-        entryPoint: web

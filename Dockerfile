@@ -7,7 +7,6 @@ COPY ./config/dynamic.yml /etc/traefik/dynamic.yml
 
 RUN chown -R traefik:traefik /etc/traefik
 
-
 USER traefik
 
 EXPOSE 8080
