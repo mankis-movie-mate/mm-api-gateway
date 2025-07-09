@@ -3,9 +3,10 @@ FROM traefik:latest
 RUN apk add --no-cache gettext
 
 COPY ./entrypoint.sh /entrypoint.sh
-COPY ./config/traefik.yml /etc/traefik/traefik.yml
+COPY ./config/traefik.template.yml /traefik.template.yml
 COPY ./config/dynamic.template.yml /dynamic.template.yml
 
+RUN mkdir -p /etc/traefik
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 8080

@@ -1,41 +1,10 @@
 http:
   routers:
+    # Dashboard router
     dashboard:
       rule: "(PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       service: api@internal
       entryPoints:
         - internal
 
-    excluded-router:
-      rule: "PathPrefix(`/users/login`) 
-      || PathPrefix(`/users/validate`) 
-      || PathPrefix(`/users/register`)"
-      priority: 100
-      service: user-service
-
-    secure-router:
-      rule: "PathPrefix(`/users/`)"
-      priority: 1
-      middlewares:
-        - user-auth
-      service: user-service
-
-  middlewares:
-    user-auth:
-      forwardAuth:
-        address: ${MOVIE_MATE_USER_SERVICE_VALIDATION_ENDPOINT_URL}
-        authRequestHeaders:
-          - "Authorization"
-        authResponseHeaders:
-          - "X-User-Id"
-          - "X-User-Username"
-          - "X-User-Email"
-          - "X-User-Roles"
-        trustForwardHeader: true
-
-  services:
-    user-service:
-      loadBalancer:
-        servers:
-          - url: ${MOVIE_MATE_USER_SERVICE_URL}
 
