@@ -1,10 +1,16 @@
 http:
   routers:
-    # Dashboard router
+    # Traefik Dashboard
     dashboard:
       rule: "(PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       service: api@internal
       entryPoints:
         - internal
 
+  middlewares:
+    dapr-rewrite:
+      replacePathRegex:
+        regex: "^/([^/]+)(/.*)?"
+        replacement: "/v1.0/invoke/${1}/method${2}"
+        # Example: /mm-user-service/profile → /v1.0/invoke/mm-user-service/method/profile
 

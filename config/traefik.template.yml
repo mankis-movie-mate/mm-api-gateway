@@ -5,7 +5,8 @@ api:
 entryPoints:
   internal:
     address: ":${MOVIE_MATE_API_GATEWAY_INTERNAL_LISTENING_PORT}"
-
+  metrics:
+      address: ":${MOVIE_MATE_API_GATEWAY_METRICS_PORT}"
 
 providers:
   file:
@@ -21,3 +22,25 @@ log:
 
 accessLog:
   format: common
+
+tracing:
+  otlp:
+    http:
+      endpoint: http://mm-otel-collector:4318/v1/traces #standard port of otel inside private network
+      tls:
+        insecureSkipVerify: true
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addServicesLabels: true
+    addRoutersLabels: true
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    headerLabels:
+      useragent: User-Agent
+      forwardedhost: X-Forwarded-Host
