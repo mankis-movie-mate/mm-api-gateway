@@ -2,7 +2,7 @@ http:
   routers:
     # Traefik Dashboard
     dashboard:
-      rule: "(PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      rule: "(PathPrefix(`${MOVIE_MATE_BASE_PATH}/api`) || PathPrefix(`${MOVIE_MATE_BASE_PATH}/dashboard`))"
       service: api@internal
       entryPoints:
         - internal
