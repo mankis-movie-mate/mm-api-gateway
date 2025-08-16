@@ -1,6 +1,7 @@
 api:
   dashboard: true
   insecure: false
+  basePath: "${MOVIE_MATE_BASE_PATH}"
 
 entryPoints:
   internal:
