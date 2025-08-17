@@ -2,7 +2,7 @@ http:
   routers:
     # Traefik Dashboard
     dashboard:
-      rule: "PathPrefix(`/traefik`)"
+      rule: "PathPrefix(`${MOVIE_MATE_BASE_PATH}/traefik`)"
       service: api@internal
       entryPoints:
         - internal
@@ -10,7 +10,7 @@ http:
   middlewares:
     dapr-rewrite:
       replacePathRegex:
-        regex: "^/([^/]+)(/.*)?"
+        regex: "^${MOVIE_MATE_BASE_PATH}/([^/]+)(/.*)?"
         replacement: "/v1.0/invoke/${1}/method${2}"
         # Example : /mm-user-service/profile → /v1.0/invoke/mm-user-service/method/profile
 
