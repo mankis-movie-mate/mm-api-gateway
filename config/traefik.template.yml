@@ -1,7 +1,7 @@
 api:
   dashboard: true
   insecure: false
-  basePath: "${MOVIE_MATE_BASE_PATH}"
+  basePath: "/traefik"
 
 entryPoints:
   internal:
