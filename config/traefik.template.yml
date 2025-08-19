@@ -27,7 +27,7 @@ accessLog:
 tracing:
   otlp:
     http:
-      endpoint: http://mm-otel-collector:4318/v1/traces #standard port of otel inside private network
+      endpoint: "${MOVIE_MATE_OTEL_COLLECTOR_TRACING_URL}"
 
 
 metrics:
