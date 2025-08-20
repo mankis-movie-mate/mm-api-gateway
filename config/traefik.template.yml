@@ -1,0 +1,46 @@
+api:
+  dashboard: true
+  insecure: false
+  basePath: "${MOVIE_MATE_BASE_PATH}/traefik"
+
+entryPoints:
+  internal:
+    address: ":${MOVIE_MATE_API_GATEWAY_INTERNAL_LISTENING_PORT}"
+  metrics:
+      address: ":${MOVIE_MATE_API_GATEWAY_METRICS_PORT}"
+
+providers:
+  file:
+    filename: "/etc/traefik/dynamic.yml"
+  consulCatalog:
+    endpoint:
+      address: "${MOVIE_MATE_DISCOVERY_SERVER_HOST}:${MOVIE_MATE_DISCOVERY_SERVER_PORT}"
+    exposedByDefault: false
+
+log:
+  level: DEBUG
+  format: common
+
+accessLog:
+  format: common
+
+tracing:
+  otlp:
+    http:
+      endpoint: "${MOVIE_MATE_OTEL_COLLECTOR_TRACING_URL}"
+
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addServicesLabels: true
+    addRoutersLabels: true
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    headerLabels:
+      useragent: User-Agent
+      forwardedhost: X-Forwarded-Host
