@@ -13,4 +13,14 @@ http:
         regex: "^/([^/]+)(/.*)?"
         replacement: "/v1.0/invoke/${1}/method${2}"
         # Example: /mm-user-service/profile → /v1.0/invoke/mm-user-service/method/profile
+    jwt-forwardauth:
+      forwardAuth:
+        address: "${MOVIE_MATE_USER_SERVICE_TOKEN_VALIDATION_URL}"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - X-User-Id
+          - X-User-Username
+          - X-User-Email
+          - X-User-Roles
+          - Authorization
 

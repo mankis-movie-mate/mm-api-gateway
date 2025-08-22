@@ -13,6 +13,7 @@ providers:
   file:
     filename: "/etc/traefik/dynamic.yml"
   consulCatalog:
+    serviceName: mm-api-gateway
     endpoint:
       address: "${MOVIE_MATE_DISCOVERY_SERVER_HOST}:${MOVIE_MATE_DISCOVERY_SERVER_PORT}"
     exposedByDefault: false
