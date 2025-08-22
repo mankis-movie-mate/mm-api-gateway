@@ -25,6 +25,7 @@ accessLog:
   format: common
 
 tracing:
+  serviceName: mm-api-gateway
   otlp:
     http:
       endpoint: "${MOVIE_MATE_OTEL_COLLECTOR_TRACING_URL}"
