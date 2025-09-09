@@ -6,8 +6,12 @@ api:
 entryPoints:
   internal:
     address: ":${MOVIE_MATE_API_GATEWAY_INTERNAL_LISTENING_PORT}"
+    forwardedHeaders:
+      insecure: true
   metrics:
       address: ":${MOVIE_MATE_API_GATEWAY_METRICS_PORT}"
+      forwardedHeaders:
+        insecure: true
 
 providers:
   file:
