@@ -6,6 +6,8 @@ http:
       service: api@internal
       entryPoints:
         - internal
+      middlewares:
+        - oauth-forwardauth
 
   middlewares:
     dapr-rewrite:
@@ -23,4 +25,9 @@ http:
           - X-User-Email
           - X-User-Roles
           - Authorization
+    oauth-forwardauth:
+      forwardAuth:
+        address: "${MOVIE_MATE_OAUTH_URL}"
+        trustForwardHeader: true
+
 
