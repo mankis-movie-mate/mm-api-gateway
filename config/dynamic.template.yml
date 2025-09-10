@@ -7,7 +7,7 @@ http:
       entryPoints:
         - internal
       middlewares:
-        - oauth-forwardauth
+        - oauth-forwardauth@file
 
   middlewares:
     dapr-rewrite:
@@ -29,5 +29,9 @@ http:
       forwardAuth:
         address: "${MOVIE_MATE_OAUTH_URL}"
         trustForwardHeader: true
+        authRequestHeaders:
+          - X-Forwarded-Proto
+          - X-Forwarded-Host
+          - X-Forwarded-Port
 
 

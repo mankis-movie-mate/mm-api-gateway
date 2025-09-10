@@ -10,8 +10,6 @@ entryPoints:
       insecure: true
   metrics:
       address: ":${MOVIE_MATE_API_GATEWAY_METRICS_PORT}"
-      forwardedHeaders:
-        insecure: true
 
 providers:
   file:

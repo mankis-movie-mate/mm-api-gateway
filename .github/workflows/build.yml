@@ -28,10 +28,10 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USER }}/mm-api-gateway:latest
 
-      - name: Trigger redeploy
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          repository: mankis-movie-mate/mm-infrastructure
-          event-type: api-gateway-builded
-          client-payload: '{"service": "mm-api-gateway", "tag": "latest"}'
-          token: ${{ secrets.MM_TOKEN }}
+#      - name: Trigger redeploy
+#        uses: peter-evans/repository-dispatch@v1
+#        with:
+#          repository: mankis-movie-mate/mm-infrastructure
+#          event-type: api-gateway-builded
+#          client-payload: '{"service": "mm-api-gateway", "tag": "latest"}'
+#          token: ${{ secrets.MM_TOKEN }}
