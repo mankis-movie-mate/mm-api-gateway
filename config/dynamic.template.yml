@@ -35,7 +35,6 @@ http:
           - X-Forwarded-Port
           - X-Forwarded-Uri
           - X-Original-Uri
-          - Cookie
         authResponseHeaders:
           - X-Auth-Request-Email
           - X-Auth-Request-User
