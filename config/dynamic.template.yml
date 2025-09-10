@@ -32,7 +32,6 @@ http:
         authRequestHeaders:
           - X-Forwarded-Host
           - X-Forwarded-Proto
-          - X-Forwarded-Uri
           - X-Forwarded-Port
           - X-Forwarded-Uri
           - X-Original-Uri
