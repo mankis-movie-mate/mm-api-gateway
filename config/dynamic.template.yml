@@ -30,8 +30,15 @@ http:
         address: "${MOVIE_MATE_OAUTH_URL}"
         trustForwardHeader: true
         authRequestHeaders:
-          - X-Forwarded-Proto
           - X-Forwarded-Host
+          - X-Forwarded-Proto
+          - X-Forwarded-Uri
           - X-Forwarded-Port
+          - X-Forwarded-Uri
+          - X-Original-Uri
+        authResponseHeaders:
+          - X-Auth-Request-Email
+          - X-Auth-Request-User
+          - Authorization
 
 
