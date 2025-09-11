@@ -33,6 +33,11 @@ tracing:
     http:
       endpoint: "${MOVIE_MATE_OTEL_COLLECTOR_TRACING_URL}"
 
+experimental:
+  plugins:
+    redirectErrors:
+      moduleName: github.com/indivisible/redirecterrors
+      version: v0.1.0
 
 metrics:
   prometheus:

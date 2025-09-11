@@ -7,7 +7,7 @@ http:
       entryPoints:
         - internal
       middlewares:
-        - oauth-errors@file
+        - login-redirect@file
         - oauth-forwardauth@file
 
   middlewares:
@@ -44,12 +44,19 @@ http:
           - X-Auth-Request-Email
           - X-Auth-Request-User
           - Authorization
-    oauth-errors:
-      errors:
-        status:
-          - "401-403"
-        service:  oauth2-proxy@file
-        query: "${MOVIE_MATE_OAUTH_BASE_PATH}/sign_in?rd={url}"
+    login-redirect:
+      plugin:
+        redirectErrors:
+          status:
+            - "401-403"
+          target: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/sign_in?rd={url}"
+          outputStatus: 302
+#    oauth-errors:
+#      errors:
+#        status:
+#          - "401-403"
+#        service:  oauth2-proxy@file
+#        query: "${MOVIE_MATE_OAUTH_BASE_PATH}/sign_in?rd={url}"
 
   services:
     oauth2-proxy:
