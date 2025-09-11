@@ -31,7 +31,7 @@ http:
         # Prefer in-cluster service to avoid edge-proxy quirks. Keep external URL if you want.
         # auth -> 201 success, 401 must be middleware that redirects to login
         #address: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/auth"
-        address: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}"
+        address: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/auth"
         trustForwardHeader: true
         authRequestHeaders:
           - Cookie
