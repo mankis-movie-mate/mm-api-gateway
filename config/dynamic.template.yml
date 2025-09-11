@@ -47,7 +47,7 @@ http:
       errors:
         status:
           - "401-403"
-        address: "${MOVIE_MATE_OAUTH_URL}"
+        service: "${MOVIE_MATE_OAUTH_URL}"
         query: "/sign_in?rd={url}"
 
 
