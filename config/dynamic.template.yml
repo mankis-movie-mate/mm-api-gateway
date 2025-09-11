@@ -7,8 +7,7 @@ http:
       entryPoints:
         - internal
       middlewares:
-        - login-redirect@file
-        - oauth-forwardauth@file
+        - oauth-redirect@file
 
   middlewares:
     dapr-rewrite:
@@ -26,11 +25,10 @@ http:
           - X-User-Email
           - X-User-Roles
           - Authorization
-    oauth-forwardauth:
+    oauth-proxy-check:
       forwardAuth:
         # Prefer in-cluster service to avoid edge-proxy quirks. Keep external URL if you want.
         # auth -> 201 success, 401 must be middleware that redirects to login
-        #address: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/auth"
         address: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/auth"
         trustForwardHeader: true
         authRequestHeaders:
@@ -44,13 +42,19 @@ http:
           - X-Auth-Request-Email
           - X-Auth-Request-User
           - Authorization
-    login-redirect:
+    oauth-proxy-redirect-error:
       plugin:
         redirectErrors:
           status:
             - "401-403"
           target: "${MOVIE_MATE_OAUTH_HOST}${MOVIE_MATE_OAUTH_BASE_PATH}/sign_in?rd={url}"
           outputStatus: 302
+    oauth-redirect:
+      chain:
+        - oauth-proxy-redirect-error
+        - oauth-proxy-check
+
+#Native solution to error
 #    oauth-errors:
 #      errors:
 #        status:
