@@ -6,8 +6,6 @@ http:
       service: api@internal
       entryPoints:
         - internal
-      middlewares:
-        - oauth-redirect@file
 
   middlewares:
     dapr-rewrite:
