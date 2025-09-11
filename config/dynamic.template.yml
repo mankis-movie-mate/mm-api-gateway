@@ -51,8 +51,9 @@ http:
           outputStatus: 302
     oauth-redirect:
       chain:
-        - oauth-proxy-redirect-error
-        - oauth-proxy-check
+        middlewares:
+          - oauth-proxy-redirect-error
+          - oauth-proxy-check
 
 #Native solution to error
 #    oauth-errors:
