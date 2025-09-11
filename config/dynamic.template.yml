@@ -7,6 +7,7 @@ http:
       entryPoints:
         - internal
       middlewares:
+        - oauth-errors@file
         - oauth-forwardauth@file
 
   middlewares:
@@ -27,7 +28,9 @@ http:
           - Authorization
     oauth-forwardauth:
       forwardAuth:
-        address: "${MOVIE_MATE_OAUTH_URL}"
+        # Prefer in-cluster service to avoid edge-proxy quirks. Keep external URL if you want.
+        # auth -> 201 success, 401 must be middleware that redirects to login
+        address: "${MOVIE_MATE_OAUTH_URL/auth}"
         trustForwardHeader: true
         authRequestHeaders:
           - Cookie
@@ -40,5 +43,11 @@ http:
           - X-Auth-Request-Email
           - X-Auth-Request-User
           - Authorization
+    oauth-errors:
+      errors:
+        status:
+          - "401-403"
+        address: "${MOVIE_MATE_OAUTH_URL}"
+        query: "/sign_in?rd={url}"
 
 
