@@ -47,7 +47,12 @@ http:
       errors:
         status:
           - "401-403"
-        service: "${MOVIE_MATE_OAUTH_URL}"
+        service:  oauth2-proxy@file
         query: "/sign_in?rd={url}"
 
-
+  services:
+    oauth2-proxy:
+      loadBalancer:
+        servers:
+          - url: "${MOVIE_MATE_OAUTH_URL}"
+        passHostHeader: true
