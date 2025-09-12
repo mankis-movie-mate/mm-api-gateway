@@ -54,6 +54,10 @@ http:
         middlewares:
           - oauth-proxy-redirect-error
           - oauth-proxy-check
+    strip-cookies:
+      headers:
+        customRequestHeaders:
+          Cookie: ""
   
   #Native solution to error
   #    oauth-errors:
