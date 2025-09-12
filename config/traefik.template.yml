@@ -6,6 +6,8 @@ api:
 entryPoints:
   internal:
     address: ":${MOVIE_MATE_API_GATEWAY_INTERNAL_LISTENING_PORT}"
+    forwardedHeaders:
+      insecure: true
   metrics:
       address: ":${MOVIE_MATE_API_GATEWAY_METRICS_PORT}"
 
@@ -13,6 +15,7 @@ providers:
   file:
     filename: "/etc/traefik/dynamic.yml"
   consulCatalog:
+    serviceName: mm-api-gateway
     endpoint:
       address: "${MOVIE_MATE_DISCOVERY_SERVER_HOST}:${MOVIE_MATE_DISCOVERY_SERVER_PORT}"
     exposedByDefault: false
@@ -25,10 +28,16 @@ accessLog:
   format: common
 
 tracing:
+  serviceName: mm-api-gateway
   otlp:
     http:
       endpoint: "${MOVIE_MATE_OTEL_COLLECTOR_TRACING_URL}"
 
+experimental:
+  plugins:
+    redirectErrors:
+      moduleName: github.com/indivisible/redirecterrors
+      version: v0.1.0
 
 metrics:
   prometheus:
